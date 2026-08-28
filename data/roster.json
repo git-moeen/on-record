@@ -1,0 +1,82 @@
+{
+  "officials": [
+    {
+      "id": "newsom",
+      "name": "Gavin Newsom",
+      "office": "Governor of California",
+      "jurisdiction": "California",
+      "aliases": ["newsom", "gavin newsom", "governor newsom", "the governor"],
+      "sources": [
+        {
+          "label": "Office of the Governor newsroom",
+          "url": "https://www.gov.ca.gov/newsroom/",
+          "kind": "newsroom"
+        }
+      ]
+    },
+    {
+      "id": "padilla",
+      "name": "Alex Padilla",
+      "office": "U.S. Senator (California)",
+      "jurisdiction": "California",
+      "aliases": ["padilla", "alex padilla", "senator padilla"],
+      "sources": [
+        {
+          "label": "Senator Padilla newsroom",
+          "url": "https://www.padilla.senate.gov/newsroom/",
+          "kind": "newsroom"
+        }
+      ]
+    },
+    {
+      "id": "schiff",
+      "name": "Adam Schiff",
+      "office": "U.S. Senator (California)",
+      "jurisdiction": "California",
+      "aliases": ["schiff", "adam schiff", "senator schiff"],
+      "sources": [
+        {
+          "label": "Senator Schiff newsroom",
+          "url": "https://www.schiff.senate.gov/newsroom/",
+          "kind": "newsroom"
+        }
+      ]
+    },
+    {
+      "id": "porter",
+      "name": "Katie Porter",
+      "office": "Former U.S. Representative (CA-47)",
+      "jurisdiction": "California",
+      "aliases": ["porter", "katie porter"],
+      "sources": []
+    },
+    {
+      "id": "lurie",
+      "name": "Daniel Lurie",
+      "office": "Mayor of San Francisco",
+      "jurisdiction": "San Francisco",
+      "aliases": ["lurie", "daniel lurie", "mayor lurie", "sf mayor", "san francisco mayor"],
+      "sources": [
+        {
+          "label": "SF.gov mayor news",
+          "url": "https://www.sf.gov/mayor-daniel-lurie",
+          "kind": "newsroom"
+        }
+      ]
+    },
+    {
+      "id": "bass",
+      "name": "Karen Bass",
+      "office": "Mayor of Los Angeles",
+      "jurisdiction": "Los Angeles",
+      "aliases": ["bass", "karen bass", "mayor bass", "la mayor", "los angeles mayor"],
+      "sources": [
+        {
+          "label": "Mayor Bass newsroom",
+          "url": "https://mayor.lacity.gov/news",
+          "kind": "newsroom"
+        }
+      ]
+    }
+  ]
+}
