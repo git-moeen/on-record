@@ -54,15 +54,15 @@
       "synthetic": false
     },
     {
-      "id": "newsom-water-2026-08",
+      "id": "newsom-water-2026-08-28",
       "personId": "newsom",
-      "date": "2026-08-01",
-      "datePrecision": "month",
+      "date": "2026-08-28",
+      "datePrecision": "day",
       "topics": ["water"],
       "stance": "fund",
       "text": "Announced $44 million for 15 tribal stewardship, salmon recovery, and desert protection projects as part of the state’s 30x30 conservation goal.",
-      "sourceUrl": "https://www.gov.ca.gov/newsroom/",
-      "sourceLabel": "Office of the Governor newsroom",
+      "sourceUrl": "https://www.gov.ca.gov/2026/08/28/governor-newsom-announces-44-million-for-tribal-stewardship-salmon-recovery-and-desert-protection-projects/",
+      "sourceLabel": "Office of the Governor",
       "synthetic": false
     },
     {

@@ -23,7 +23,7 @@ async function main() {
     console.log("INFONA_URL unset — staying in fixture mode. Local graph is enough for npm run dev.");
     return;
   }
-  if (!createInfonaClient()) {
+  if (!(await createInfonaClient())) {
     console.log("Infona client not created.");
     return;
   }

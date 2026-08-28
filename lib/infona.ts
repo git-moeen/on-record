@@ -1,18 +1,32 @@
-import { Client, InfonaError } from "@infona-ai/cli";
 import { askLocal } from "./ask";
 import { lastEnrichedAt, loadOfficials, loadStatements } from "./graph";
 import type { AskAnswer, Citation, StatusPayload } from "./types";
 
 const KG = process.env.INFONA_KG ?? "on-record";
 
+type InfonaClient = {
+  ask: (
+    question: string,
+    opts?: { kg?: string },
+  ) => Promise<Record<string, unknown>>;
+  createKg: (name: string, description?: string) => Promise<unknown>;
+  ingest: (
+    pathOrText: string,
+    opts?: { kg?: string; typeName?: string },
+  ) => Promise<Record<string, unknown>>;
+  erRebuild: (kg: string) => Promise<unknown>;
+};
+
 export function infonaUrl(): string | null {
   const raw = process.env.INFONA_URL || process.env.INFONA_API_URL || "";
   return raw.trim() || null;
 }
 
-export function createInfonaClient(): Client | null {
+export async function createInfonaClient(): Promise<InfonaClient | null> {
   const baseUrl = infonaUrl();
   if (!baseUrl) return null;
+  // ESM-only package. Dynamic import so fixture `npm run enrich` (tsx/CJS) still runs.
+  const { Client } = await import("@infona-ai/cli");
   return new Client({
     baseUrl,
     apiKey: process.env.INFONA_API_KEY,
@@ -64,7 +78,7 @@ export async function probeInfona(): Promise<boolean> {
 
 export async function askQuestion(question: string): Promise<AskAnswer> {
   const local = askLocal(question);
-  const client = createInfonaClient();
+  const client = await createInfonaClient();
   if (!client) return local;
 
   try {
@@ -83,12 +97,7 @@ export async function askQuestion(question: string): Promise<AskAnswer> {
         "Answered through Infona /ask on the on-record graph. Local receipts stay attached when Infona returns none.",
     };
   } catch (err) {
-    const message =
-      err instanceof InfonaError
-        ? err.message
-        : err instanceof Error
-          ? err.message
-          : "Infona ask failed";
+    const message = err instanceof Error ? err.message : "Infona ask failed";
     return {
       ...local,
       infonaNote: `Infona is configured but ask failed (${message}). Fell back to the local fixture graph.`,
@@ -99,7 +108,7 @@ export async function askQuestion(question: string): Promise<AskAnswer> {
 export async function ingestStatementsCsv(
   csvPath: string,
 ): Promise<Record<string, unknown>> {
-  const client = createInfonaClient();
+  const client = await createInfonaClient();
   if (!client) {
     throw new Error("INFONA_URL is not set. Fixture mode has nothing to ingest into.");
   }

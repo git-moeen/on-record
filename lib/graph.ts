@@ -61,48 +61,23 @@ export function findOfficials(question: string): Official[] {
 export function findTopics(question: string): TopicId[] {
   const q = question.toLowerCase();
   const hits: TopicId[] = [];
-  const rules: Array<[TopicId, string[]]> = [
+  const rules: Array<[TopicId, RegExp]> = [
     [
       "housing",
-      [
-        "housing",
-        "homeless",
-        "homelessness",
-        "rent",
-        "zoning",
-        "homeownership",
-        "affordable home",
-      ],
+      /\b(housing|homeless(?:ness)?|rent(?:al|s|ers)?|zoning|homeownership|affordable homes?)\b/,
     ],
     [
       "water",
-      [
-        "water",
-        "drought",
-        "reservoir",
-        "salmon",
-        "delta",
-        "aqueduct",
-        "recycling",
-      ],
+      /\b(water|drought|reservoirs?|salmon|delta|aqueduct|recycling)\b/,
     ],
     [
       "ai",
-      [
-        " ai",
-        "ai ",
-        "artificial intelligence",
-        "generative",
-        "data center",
-        "anthropic",
-        "llm",
-      ],
+      /\b(ai|artificial intelligence|generative(?:-|\s)?ai|data centres?|data centers?|anthropic|llms?)\b/,
     ],
   ];
-  for (const [topic, keys] of rules) {
-    if (keys.some((k) => q.includes(k))) hits.push(topic);
+  for (const [topic, re] of rules) {
+    if (re.test(q)) hits.push(topic);
   }
-  if (q.includes("ai") && !hits.includes("ai")) hits.push("ai");
   return hits;
 }
 

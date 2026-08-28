@@ -5,10 +5,10 @@ import type { Official, PersonId, Stance, Statement, TopicId } from "./types";
 
 const USER_AGENT = "on-record/0.1 (+https://github.com/git-moeen/on-record)";
 
-const TOPIC_KEYS: Array<[TopicId, string[]]> = [
-  ["housing", ["housing", "homeless", "zoning", "rent", "homeownership"]],
-  ["water", ["water", "drought", "salmon", "reservoir", "delta", "aqueduct"]],
-  ["ai", ["artificial intelligence", " ai ", "generative ai", "data center"]],
+const TOPIC_KEYS: Array<[TopicId, RegExp]> = [
+  ["housing", /\b(housing|homeless(?:ness)?|zoning|rent(?:al|s)?|homeownership)\b/i],
+  ["water", /\b(water|drought|salmon|reservoirs?|delta|aqueduct)\b/i],
+  ["ai", /\b(ai|artificial intelligence|generative(?:-|\s)?ai|data centres?|data centers?)\b/i],
 ];
 
 function slug(value: string): string {
@@ -35,10 +35,7 @@ function stripTags(html: string): string {
 }
 
 function topicsFrom(text: string): TopicId[] {
-  const hay = ` ${text.toLowerCase()} `;
-  return TOPIC_KEYS.filter(([, keys]) => keys.some((k) => hay.includes(k))).map(
-    ([id]) => id,
-  );
+  return TOPIC_KEYS.filter(([, re]) => re.test(text)).map(([id]) => id);
 }
 
 function guessDate(html: string, fallback: string): string {
@@ -144,7 +141,7 @@ function toStatement(official: Official, item: Scraped): Statement {
     personId: official.id as PersonId,
     date: item.date,
     datePrecision: item.date.endsWith("-01") ? "month" : "day",
-    topics: topics.length ? topics : ["housing"],
+    topics,
     stance: stanceFor(topics, item.title),
     text: item.title,
     sourceUrl: item.url,
@@ -174,6 +171,7 @@ export async function enrichFromOfficialPages(): Promise<{
       fetched += 1;
       for (const item of extractCards(html, source.url)) {
         if (existing.has(item.url)) continue;
+        if (!topicsFrom(`${item.title} ${item.excerpt}`).length) continue;
         const row = toStatement(official, item);
         existing.add(item.url);
         added.push(row);

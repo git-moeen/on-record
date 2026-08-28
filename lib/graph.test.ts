@@ -14,6 +14,9 @@ test("topics and year", () => {
     "water",
     "ai",
   ]);
+  assert.deepEqual(findTopics("What has Newsom said about housing this year?"), [
+    "housing",
+  ]);
   assert.equal(findYear("this year"), new Date().getUTCFullYear());
 });
 
