@@ -110,6 +110,7 @@ export function filterStatements(opts: {
   year?: number;
 }): Statement[] {
   const { people, topics, year } = opts;
+  if (!people.length || !topics.length) return [];
   return loadStatements().filter((row) => {
     if (people.length && !people.some((p) => p.id === row.personId)) {
       return false;

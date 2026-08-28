@@ -73,8 +73,17 @@ function composeAnswer(opts: {
 }): { answer: string; unsure: boolean } {
   const { people, topics, year, rows, conflicts } = opts;
   if (rows.length === 0) {
-    const who = people.map((p) => p.name).join(" / ") || "that official";
-    const about = topics.length ? ` about ${topics.join(" / ")}` : "";
+    if (!people.length) {
+      return {
+        unsure: true,
+        answer:
+          "I do not have a cited statement for that question in this graph. Name someone on the roster and a topic we track (housing, water, AI).",
+      };
+    }
+    const who = people.map((p) => p.name).join(" / ");
+    const about = topics.length
+      ? ` about ${topics.join(" / ")}`
+      : " about that topic";
     const when = year ? ` in ${year}` : "";
     return {
       unsure: true,
