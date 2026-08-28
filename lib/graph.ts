@@ -155,6 +155,7 @@ export function graphPayload(mode: "fixture" | "infona"): GraphPayload {
       personId: row.personId,
       topics: row.topics,
       date: row.date,
+      stance: row.stance,
       synthetic: row.synthetic,
       label: row.text.slice(0, 72),
     })),

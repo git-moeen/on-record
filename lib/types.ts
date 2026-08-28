@@ -85,6 +85,7 @@ export type GraphPayload = {
     personId: PersonId;
     topics: TopicId[];
     date: string;
+    stance: Stance;
     synthetic: boolean;
     label: string;
   }>;

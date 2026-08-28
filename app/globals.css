@@ -1,13 +1,12 @@
 :root {
   --ink: #0c0b09;
-  --ink-2: #161411;
+  --ink-2: #141210;
   --paper: #e8dfd0;
   --paper-dim: #b9ae9c;
   --rule: #3a342c;
   --stamp: #c23a2b;
   --stamp-soft: #c23a2b33;
   --gold: #c4a574;
-  --ok: #8fbe8a;
 }
 
 * {
@@ -24,7 +23,6 @@ body {
 
 body {
   font-family: "IBM Plex Sans", "Source Sans 3", system-ui, sans-serif;
-  letter-spacing: 0.01em;
 }
 
 a {
@@ -37,56 +35,56 @@ textarea {
   font: inherit;
 }
 
-.shell {
-  max-width: 1180px;
+.stage {
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 28px 22px 72px;
+  padding: 18px 18px 56px;
 }
 
-.top {
+.hud {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 22px;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
 .brand {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
 }
 
 .stamp {
-  width: 72px;
-  height: 72px;
-  border: 3px solid var(--stamp);
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--stamp);
   color: var(--stamp);
   border-radius: 50%;
   display: grid;
   place-items: center;
   text-align: center;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   transform: rotate(-8deg);
   background: var(--stamp-soft);
+  flex-shrink: 0;
 }
 
 .brand h1 {
   margin: 0;
   font-family: "Fraunces", "Iowan Old Style", serif;
   font-weight: 500;
-  font-size: 42px;
+  font-size: 32px;
   line-height: 0.95;
 }
 
 .brand p {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   color: var(--paper-dim);
-  max-width: 42ch;
+  font-size: 14px;
 }
 
 .badge {
@@ -94,38 +92,132 @@ textarea {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  border: 1px solid var(--rule);
-  padding: 8px 10px;
   color: var(--paper-dim);
-  white-space: nowrap;
 }
 
-.badge strong {
-  color: var(--gold);
-  font-weight: 500;
+.hero {
+  position: relative;
+  border: 1px solid var(--rule);
+  background: #0c0b09;
 }
 
-.layout {
+.hero-graph {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 520px;
+}
+
+.hero-empty {
+  min-height: 420px;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  gap: 28px;
-  margin-top: 28px;
+  place-items: center;
+  color: var(--paper-dim);
+}
+
+.hero-legend {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+
+.swatch {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.swatch.gold {
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.swatch.stamp {
+  background: var(--stamp);
+}
+
+.swatch.paper {
+  background: var(--paper);
+  border-radius: 50%;
+}
+
+.swatch.fight {
+  background: transparent;
+  border: 1px dashed var(--stamp);
+}
+
+.node-name {
+  fill: var(--paper);
+  font-size: 15px;
+  font-family: "Fraunces", "Iowan Old Style", serif;
+}
+
+.node-sub {
+  fill: var(--paper-dim);
+  font-size: 10px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.topic-name {
+  fill: var(--paper);
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.stmt {
+  cursor: pointer;
+}
+
+.stmt-date {
+  fill: var(--paper);
+  font-size: 11px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.fight-tag {
+  fill: var(--stamp);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.path-lit {
+  stroke-dasharray: 8 6;
+  animation: walk 1.1s linear infinite;
+}
+
+@keyframes walk {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.ask {
+  margin-top: 16px;
 }
 
 .ask form {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .ask textarea {
   width: 100%;
-  min-height: 92px;
   resize: vertical;
   background: var(--ink-2);
   color: var(--paper);
   border: 1px solid var(--rule);
-  padding: 14px 14px 16px;
-  border-radius: 2px;
+  padding: 12px;
 }
 
 .ask textarea:focus {
@@ -160,6 +252,7 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 10px;
 }
 
 .chips button {
@@ -177,39 +270,50 @@ textarea {
   border-color: var(--gold);
 }
 
-.answer {
-  margin-top: 22px;
+.receipt {
+  margin-top: 18px;
   border-top: 1px solid var(--rule);
-  padding-top: 18px;
+  padding-top: 16px;
 }
 
-.answer pre {
+.receipt pre {
   white-space: pre-wrap;
   font-family: "Fraunces", "Iowan Old Style", serif;
-  font-size: 20px;
-  line-height: 1.45;
-  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 14px;
 }
 
 .meta {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 12px;
   color: var(--paper-dim);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .citations {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .cite {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  border: 0;
   border-left: 3px solid var(--gold);
   padding: 8px 0 8px 12px;
+  cursor: pointer;
 }
 
 .cite.demo {
   border-left-color: var(--stamp);
+}
+
+.cite.on {
+  background: #1a1612;
 }
 
 .cite a {
@@ -226,11 +330,10 @@ textarea {
 
 .cite p {
   margin: 6px 0 0;
-  color: var(--paper);
 }
 
 .conflict {
-  margin-top: 16px;
+  margin: 0 0 12px;
   padding: 12px;
   border: 1px dashed var(--stamp);
   background: #1a100e;
@@ -238,78 +341,27 @@ textarea {
 
 .conflict h3 {
   margin: 0 0 8px;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--stamp);
   font-weight: 500;
 }
 
-.panel h2 {
-  margin: 0 0 6px;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 500;
-}
-
-.panel .hint {
-  color: var(--paper-dim);
-  font-size: 13px;
-  margin: 0 0 12px;
-}
-
-.roster {
-  display: grid;
-  gap: 6px;
-  margin: 0 0 18px;
-  padding: 0;
-  list-style: none;
-}
-
-.roster li {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 14px;
-  border-bottom: 1px solid #241f1a;
-  padding: 6px 0;
-}
-
-.roster span {
-  color: var(--paper-dim);
-}
-
-svg.graph {
-  width: 100%;
-  height: auto;
-  display: block;
-  background: radial-gradient(circle at 30% 20%, #1b1713, var(--ink));
-  border: 1px solid var(--rule);
-}
-
-svg.graph text {
-  fill: var(--paper);
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-}
-
 .foot {
-  margin-top: 36px;
+  margin-top: 28px;
   border-top: 1px solid var(--rule);
-  padding-top: 16px;
+  padding-top: 14px;
   color: var(--paper-dim);
   font-size: 13px;
 }
 
-@media (max-width: 860px) {
-  .layout,
-  .top {
-    grid-template-columns: 1fr;
-    display: grid;
+@media (max-width: 700px) {
+  .brand h1 {
+    font-size: 26px;
   }
 
-  .brand h1 {
-    font-size: 34px;
+  .hud {
+    align-items: flex-start;
   }
 }
