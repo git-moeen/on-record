@@ -1,0 +1,30 @@
+{
+  "name": "on-record",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ask what California politicians actually said. Every answer has a source and a date.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "enrich": "tsx scripts/enrich.ts",
+    "test": "tsx --test lib/ask.test.ts lib/graph.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@infona-ai/cli": "^0.1.65",
+    "next": "^15.5.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.17.2",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}
