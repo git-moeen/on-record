@@ -19,6 +19,26 @@ Open [http://localhost:3000](http://localhost:3000). The first question is alrea
 
 **What has Newsom said about housing this year?**
 
+The graph is the product. Asking lights the path the answer walked. A conflict keeps both statement nodes — earlier vs later, neither dropped.
+
+![Ask lights the Newsom → housing path](docs/graph.png)
+
+### Capture for X
+
+`npm run dev`, wait for the first ask to land, then:
+
+```bash
+# 1080-wide crop of the hero. Porter housing is the fight shot.
+# Newsom housing is the clean path.
+```
+
+Set the window to 1080×900. The path is the post — crop the hero, not the receipts.
+
+```
+http://localhost:3000/
+http://localhost:3000/?q=What%20has%20Katie%20Porter%20said%20about%20housing%3F
+```
+
 Same path in Docker:
 
 ```bash

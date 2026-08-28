@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "enrich": "tsx scripts/enrich.ts",
-    "test": "tsx --test lib/ask.test.ts lib/graph.test.ts",
+    "test": "tsx --test lib/ask.test.ts lib/graph.test.ts lib/light.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
